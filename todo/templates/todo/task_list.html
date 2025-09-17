@@ -1,0 +1,23 @@
+{% extends "todo/base.html" %}
+{% block content %}
+<h1>Tasks</h1>
+<a href="{% url 'task_create' %}">➕ New Task</a>
+<ul>
+    {% for task in tasks %}
+        <li>
+            <strong>{{ task.content }}</strong><br>
+            Created: {{ task.created_at }}<br>
+            Deadline: {{ task.deadline|default:"—" }}<br>
+            Completed: {{ task.completed }}<br>
+            Tags: {{ task.tags.all|join:", " }}<br>
+            <a href="{% url 'task_toggle_complete' task.id %}">
+                {% if task.completed %}Undo ✅{% else %}Complete ✅{% endif %}
+            </a> |
+            <a href="{% url 'task_update' task.id %}">✏️ Edit</a> |
+            <a href="{% url 'task_delete' task.id %}">🗑 Delete</a>
+        </li>
+    {% empty %}
+        <li>No tasks yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

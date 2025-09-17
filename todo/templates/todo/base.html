@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do App</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; margin: 0; }
+        nav { width: 200px; padding: 1em; background: #f0f0f0; height: 100vh; }
+        main { flex: 1; padding: 1em; }
+        a { text-decoration: none; display: block; margin: .5em 0; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 1em; padding: .5em; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <nav>
+        <h3>Navigation</h3>
+        <a href="{% url 'task_list' %}">📋 Tasks</a>
+        <a href="{% url 'tag_list' %}">🏷️ Tags</a>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "todo/base.html" %}
+{% block content %}
+<h1>Tags</h1>
+<a href="{% url 'tag_create' %}">➕ New Tag</a>
+<ul>
+    {% for tag in tags %}
+        <li>
+            {{ tag.name }}
+            <a href="{% url 'tag_update' tag.id %}">✏️ Edit</a> |
+            <a href="{% url 'tag_delete' tag.id %}">🗑 Delete</a>
+        </li>
+    {% empty %}
+        <li>No tags yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
