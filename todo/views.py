@@ -41,10 +41,18 @@ class TaskToggleCompleteView(RedirectView):
 
 
 # TAGS
-class TagListView(ListView):
-    model = Tag
-    template_name = "todo/tag_list.html"
-    context_object_name = "tags"
+class TaskListView(ListView):
+    model = Task
+    template_name = "todo/task_list.html"
+    context_object_name = "tasks"
+    ordering = ["completed", "-created_at"]
+
+    def get_queryset(self):
+        return (
+            Task.objects.all()
+            .prefetch_related("tags")
+            .order_by("completed", "-created_at")
+        )
 
 
 class TagCreateView(CreateView):
